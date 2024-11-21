@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import HomePage from "./home";
+import ProductList from "./productShop";
+import Tractor from "./Tractor";
 
 function AuthCard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -244,7 +246,7 @@ function AuthCard() {
 export default function Home() {
   return (
     <div>
-      <AuthCard />
+      <Tractor />
     </div>
   );
 }
