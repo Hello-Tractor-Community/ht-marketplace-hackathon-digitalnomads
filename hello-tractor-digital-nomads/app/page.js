@@ -3,10 +3,50 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import HomePage from "./home";
+import ProductList from "./productShop";
+import Tractor from "./Tractor";
 
 function AuthCard() {
   const [showPassword, setShowPassword] = useState(false);
   const [hasAccount, setHasAccount] = useState(true); // Tracks whether the user has an account
+  
+  const [email, setEmail] = useState(""); // Tracks email input
+  const [password, setPassword] = useState(""); // Tracks password input
+  const [error, setError] = useState(null); // Tracks errors
+  const [loading, setLoading] = useState(false); // Tracks loading state
+
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();  // prevent page reload
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to sign in");
+    }
+
+    //Succeccfully signed in
+    console.log("Login successfully", data);
+    alert("Login successful");
+    //You can store the access token in localStorage or state here
+    //localStorage.setItem("access_token", data.access_token);
+   } catch(err) {
+    console.log("Email and password passed are", email, password);
+    console.error(err.message);
+    setError(err.message);
+   } finally {
+    setLoading(false);
+   } 
+  };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen">
@@ -76,7 +116,7 @@ function AuthCard() {
         <h2 className="text-3xl font-bold text-gray-900">{hasAccount ? "Sign In" : "Sign Up"}</h2>
 
         {/* Dynamic Form */}
-        <form className="mt-6">
+        <form className="mt-6" onSubmit ={hasAccount ? handleSignIn : undefined}>
           {hasAccount ? (
             <>
               {/* Email/Username Input */}
@@ -206,7 +246,7 @@ function AuthCard() {
 export default function Home() {
   return (
     <div>
-      <AuthCard />
+      <Tractor />
     </div>
   );
 }
