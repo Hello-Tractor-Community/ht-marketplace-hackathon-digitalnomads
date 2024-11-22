@@ -8,9 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        manrope: "var(--font-manrope)",
+        merriweather: "var(--font-merriweather)"
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        pri
       },
     },
   },

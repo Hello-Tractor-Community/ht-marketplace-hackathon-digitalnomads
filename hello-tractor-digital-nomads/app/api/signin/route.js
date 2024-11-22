@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
-    const { email, password} = await req.json();
-
+    console.log('this is the signin link')
+    const { email, password } = await req.json();
+    console.log('This is the email and password', email, password)
     const DIRECTUS_URL = process.env.DIRECTUS_URL;
+    console.log('This is the directus link', DIRECTUS_URL)
 
     try {
         //Authenticate user with Directus
@@ -11,11 +13,11 @@ export async function POST(req) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
-          });
+        });
 
         if (!authResponse.ok) {
             const error = await authResponse.json();
-            return NextResponse.json({ error }, { status: authResponse.status});
+            return NextResponse.json({ error }, { status: authResponse.status });
         }
 
         const authData = await authResponse.json();
@@ -28,7 +30,7 @@ export async function POST(req) {
         });
     }
     catch (error) {
-        return NextResponse.json({ error: error.message}, {status: 500});
+        return NextResponse.json({ error: error.message }, { status: 500 });
 
     }
 }

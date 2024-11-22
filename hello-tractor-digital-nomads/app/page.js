@@ -6,10 +6,10 @@ import HomePage from "./home";
 import ProductList from "./productShop";
 import Tractor from "./Tractor";
 
-function AuthCard() {
+export default function AuthCard() {
   const [showPassword, setShowPassword] = useState(false);
   const [hasAccount, setHasAccount] = useState(true); // Tracks whether the user has an account
-  
+
   const [email, setEmail] = useState(""); // Tracks email input
   const [password, setPassword] = useState(""); // Tracks password input
   const [error, setError] = useState(null); // Tracks errors
@@ -21,6 +21,8 @@ function AuthCard() {
     setLoading(true);
     setError(null);
 
+    console.log('This is the email and password', email, password)
+
     try {
       const response = await fetch("/api/signin", {
         method: "POST",
@@ -28,30 +30,30 @@ function AuthCard() {
         body: JSON.stringify({ email, password }),
       });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.error || "Failed to sign in");
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to sign in");
+      }
+
+      //Succeccfully signed in
+      console.log("Login successfully", data);
+      alert("Login successful");
+      //You can store the access token in localStorage or state here
+      //localStorage.setItem("access_token", data.access_token);
+    } catch (err) {
+      console.log("Email and password passed are", email, password);
+      console.error(err.message);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-
-    //Succeccfully signed in
-    console.log("Login successfully", data);
-    alert("Login successful");
-    //You can store the access token in localStorage or state here
-    //localStorage.setItem("access_token", data.access_token);
-   } catch(err) {
-    console.log("Email and password passed are", email, password);
-    console.error(err.message);
-    setError(err.message);
-   } finally {
-    setLoading(false);
-   } 
   };
 
   return (
     <div className="relative flex items-center justify-center min-h-screen">
       {/* Split Background */}
-      
+
       <div className="absolute inset-0 flex">
         {/* Left Side with Pink Background and Image */}
         <div className="w-1/2 bg-pink-500 relative flex items-center justify-center">
@@ -113,10 +115,10 @@ function AuthCard() {
 
         {/* Dynamic Card Title */}
         <h1 className="text-2xl font-semibold text-gray-900">Welcome to Hello Tractor</h1>
-        <h2 className="text-3xl font-bold text-gray-900">{hasAccount ? "Sign In" : "Sign Up"}</h2>
+        <h2 className="text-3xl font-bold text-gray-900 font-merriweather">{hasAccount ? "Sign In" : "Sign Up"}</h2>
 
         {/* Dynamic Form */}
-        <form className="mt-6" onSubmit ={hasAccount ? handleSignIn : undefined}>
+        <form className="mt-6" onSubmit={hasAccount ? handleSignIn : undefined}>
           {hasAccount ? (
             <>
               {/* Email/Username Input */}
@@ -128,6 +130,8 @@ function AuthCard() {
                   type="email"
                   placeholder="Username or email address"
                   className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -141,6 +145,8 @@ function AuthCard() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <button
                     type="button"
@@ -243,10 +249,10 @@ function AuthCard() {
   );
 }
 
-export default function Home() {
-  return (
-    <div>
-      <Tractor />
-    </div>
-  );
-}
+// export default function Home() {
+//   return (
+//     <div>
+//       <Tractor />
+//     </div>
+//   );
+// }
