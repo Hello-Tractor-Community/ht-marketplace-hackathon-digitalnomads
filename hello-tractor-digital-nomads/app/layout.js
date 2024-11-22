@@ -20,9 +20,15 @@ const manrope = Manrope({
 
 const merriweather = Merriweather({
   subsets: ['latin'],
-  weight:[ "300", "400", "700", "900"],
+  weight:[ "300"],
   variable: "--font-merriweather"
 })
+
+const avenir = localFont({
+  src: "./fonts/avenir_ff/AvenirLTStd-Book.otf",
+  variable: "--font-avenir",
+  weight: "100 900",
+});
 
 export const metadata = {
   title: "HelloTractor",
@@ -33,7 +39,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} ${manrope.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} ${manrope.variable} ${avenir.variable} antialiased`}
       >
         {children}
       </body>

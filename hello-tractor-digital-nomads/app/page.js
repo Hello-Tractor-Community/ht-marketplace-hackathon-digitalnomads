@@ -1,4 +1,5 @@
 'use client';
+import {} from 'next/image'
 
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
@@ -56,7 +57,7 @@ export default function AuthCard() {
 
       <div className="absolute inset-0 flex">
         {/* Left Side with Pink Background and Image */}
-        <div className="w-1/2 bg-pink-500 relative flex items-center justify-center">
+        <div className="w-1/2 bg-primary relative flex items-center justify-center">
           <img
             src="/AzizaGesture1.png"
             alt="Left Side Image"
@@ -87,7 +88,7 @@ export default function AuthCard() {
 
 
       {/* Auth Card */}
-      <div className="z-10 w-full max-w-lg p-8 bg-white rounded-lg shadow-md">
+      <div className="z-10 p-8 w-[300px] lg:w-[500px] h-[600px] bg-white rounded-lg shadow-md">
         {/* Top Toggle Link */}
         <div className="text-right mb-6">
           {hasAccount ? (
@@ -114,8 +115,8 @@ export default function AuthCard() {
         </div>
 
         {/* Dynamic Card Title */}
-        <h1 className="text-2xl font-semibold text-gray-900">Welcome to Hello Tractor</h1>
-        <h2 className="text-3xl font-bold text-gray-900 font-merriweather">{hasAccount ? "Sign In" : "Sign Up"}</h2>
+        <h1 className="text-2xl font-avenir font-extralight text-gray-900">Welcome to Hello Tractor</h1>
+        <h2 className="text-5xl font-bold text-gray-900 font-merriweather">{hasAccount ? "Sign In" : "Sign Up"}</h2>
 
         {/* Dynamic Form */}
         <form className="mt-6" onSubmit={hasAccount ? handleSignIn : undefined}>
@@ -129,7 +130,7 @@ export default function AuthCard() {
                 <input
                   type="email"
                   placeholder="Username or email address"
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-hibiscus"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -144,7 +145,7 @@ export default function AuthCard() {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-hibiscus"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -164,7 +165,7 @@ export default function AuthCard() {
 
               {/* Forgot Password */}
               <div className="flex items-center justify-end mb-4">
-                <a href="#" className="text-sm text-right text-pink-500 hover:text-pink-600">
+                <a href="#" className="text-sm text-right text-hibiscus hover:text-pink-600">
                   Forgot Password
                 </a>
               </div>
@@ -212,7 +213,7 @@ export default function AuthCard() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-pink-500 hover:bg-pink-600 w-full px-4 py-2 text-white rounded-lg"
+            className="bg-hibiscus hover:bg-hibiscus w-full px-4 py-2 text-white rounded-lg"
           >
             {hasAccount ? "Sign In" : "Sign Up"}
           </button>
@@ -229,7 +230,7 @@ export default function AuthCard() {
             <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
               <img
                 className="w-5 h-5 mr-2"
-                src="https://www.svgrepo.com/show/335037/google.svg"
+                src="google.png"
                 alt="Google"
               />
               {hasAccount ? "Sign In with Google" : "Sign Up with Google"}
@@ -237,10 +238,10 @@ export default function AuthCard() {
             <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
               <img
                 className="w-5 h-5 mr-2"
-                src="https://www.svgrepo.com/show/157817/google.svg"
+                src="Facebook.png"
                 alt="Facebook"
               />
-              {hasAccount ? "Sign In with Facebook" : "Sign Up with Facebook"}
+              {hasAccount ? "Sign In" : "Sign Up"}
             </button>
           </div>
         </div>

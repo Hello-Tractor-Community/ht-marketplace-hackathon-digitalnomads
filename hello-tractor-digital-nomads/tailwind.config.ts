@@ -10,12 +10,15 @@ export default {
     extend: {
       fontFamily: {
         manrope: "var(--font-manrope)",
-        merriweather: "var(--font-merriweather)"
+        merriweather: "var(--font-merriweather)",
+        avenir:"var(--font-avenir)"
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        pri
+        primary:"hsl(var(--primary))",
+        secondary:"hsl(var(--secondary))",
+        hibiscus:"hsl(var(--hibiscus))"
       },
     },
   },
