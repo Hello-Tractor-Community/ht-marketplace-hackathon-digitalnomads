@@ -7,11 +7,11 @@ export async function POST(req) {
     //Validation of req.json() request
     try {
         requestData = await req.json();
-    } catch(error) {
-        return NextResponse.json({ error: 'Invalid request Body'}, {status: 400});
+    } catch (error) {
+        return NextResponse.json({ error: 'Invalid request Body' }, { status: 400 });
     }
 
-    const { email, password} = requestData;
+    const { email, password } = requestData;
 
     const DIRECTUS_URL = process.env.DIRECTUS_URL;
 
@@ -33,7 +33,7 @@ export async function POST(req) {
         }
 
         const authData = await authResponse.json();
-
+        console.log('This is the auth data', authData)
         return NextResponse.json({
             message: 'Login successful',
             access_token: authData.data.access_token,
