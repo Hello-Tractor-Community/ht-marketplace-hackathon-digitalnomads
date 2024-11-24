@@ -2,22 +2,10 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
     console.log('this is the signin link')
-    let requestData;
-
-    //Validation of req.json() request
-    try {
-        requestData = await req.json();
-    } catch (error) {
-        return NextResponse.json({ error: 'Invalid request Body' }, { status: 400 });
-    }
-
-    const { email, password } = requestData;
-
+    const { email, password } = await req.json();
+    console.log('This is the email and password', email, password)
     const DIRECTUS_URL = process.env.DIRECTUS_URL;
-
-    if (!DIRECTUS_URL) {
-        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
-    }
+    console.log('This is the directus link', DIRECTUS_URL)
 
     try {
         //Authenticate user with Directus
@@ -33,7 +21,7 @@ export async function POST(req) {
         }
 
         const authData = await authResponse.json();
-        console.log('This is the auth data', authData)
+
         return NextResponse.json({
             message: 'Login successful',
             access_token: authData.data.access_token,

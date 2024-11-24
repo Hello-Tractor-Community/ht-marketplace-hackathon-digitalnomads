@@ -1,13 +1,22 @@
-import Header from "./components/Header";
-import TTractorDisplayCard from "./TractroDisplayCard";
+'use client';
+
+import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import Header from "@/app/components/Header";
+import TractorDisplayCard from "@/app/TractroDisplayCard";
+
 
 export default function Tractor() {
+    const router = useRouter();
+    const { id } = useParams;
     return(
         <div className="bg-white">
             <Header />
+            <div className="pt-10">
+            <div className="pt-20">
             <div className="flex items-center justify-center pt-30">
                 <div className="w-100 items-left">
-                    <img src="TractorImage.png" alt="Tractor Image" className="w-full h-60" />
+                    <img src="../TractorImage.png" alt="Tractor Image" className="w-full h-60" />
                 </div>
                 <div className="p-4 overflow-hidden w-[600px]">
                     <h3 className="text-bold text-[#1F1E17]-800 text-lg font-bold">Farmatic Epc 5 Pro</h3>
@@ -66,7 +75,7 @@ export default function Tractor() {
                 <div className="p-4 overflow-hidden">
                     <h3 className="text-bold text-[#1F1E17]-800 text-lg font-bold">Seller Information:</h3>
                     <div className="flex">
-                        <img src="avatar.png" alt="Seller Avatar" className="w-20 h-20" />
+                        <img src="../avatar.png" alt="Seller Avatar" className="w-20 h-20" />
                         <div className="mt-5 ml-5">
                             <h3 className="text-sm text-gray-900 font-bold">Seller Score: 89%</h3>
                             <h3 className="text-sm text-gray-900 mt-1 font-bold">Seller Score: 89%</h3>
@@ -79,7 +88,7 @@ export default function Tractor() {
                 <h3 className="font-bold text-lg mb-4 text-gray-800">1 Review for Tomato</h3>
                 <div className="flex items-start space-x-4">
                   <img
-                    src="avatar.png"
+                    src="../avatar.png"
                     alt="Reviewer Image"
                     className="w-16 h-16 rounded-full border border-gray-300"
                   />
@@ -98,12 +107,14 @@ export default function Tractor() {
                 </div>
             </div>
 
-            <div className="items-center justify-center">
+            <div className="items-center justify-center pb-20">
                 <h3 className="text-black font-bold text-center mb-5">Other Products from Seller</h3>
                 <div className="flex items-center justify-center">
-                    <TTractorDisplayCard />
-                    <TTractorDisplayCard />
+                    <TractorDisplayCard />
+                    <TractorDisplayCard />
                 </div>
+            </div>
+            </div>
             </div>
         </div>
     )

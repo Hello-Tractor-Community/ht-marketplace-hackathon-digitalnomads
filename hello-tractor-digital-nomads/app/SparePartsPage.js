@@ -1,7 +1,8 @@
 import Header from "./components/Header";
-import TractorDisplayCard from "./TractroDisplayCard";
+import SparePartDispalyCard from "./SparePartDisplayCard";
 
-export default function ProductList(){
+
+export default function SparePartsPage() {
     return (
         <div className="bg-gray-100">
         <Header />
@@ -34,16 +35,15 @@ export default function ProductList(){
 
         {/* Main Content Area */}
         <div className="w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <TractorDisplayCard />
-            <TractorDisplayCard />
-            <TractorDisplayCard />
-            <TractorDisplayCard />
-            <TractorDisplayCard />
-            <TractorDisplayCard />
-            <TractorDisplayCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
+            <SparePartDispalyCard />
         </div>
       </div>
         </div>
     );
 }
-
