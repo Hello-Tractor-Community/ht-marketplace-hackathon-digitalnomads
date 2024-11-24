@@ -1,10 +1,9 @@
 'use client';
 
 import Link from "next/link";
-import Header from "../components/Header";
+import Header from "../../organisms/navbar";
 import { useRouter } from "next/navigation";
-
-export default function HomePage() {
+function HomePage() {
   const router = useRouter();
 
   const handleDiscoverMore = () => {

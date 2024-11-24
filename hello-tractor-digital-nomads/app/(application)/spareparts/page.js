@@ -1,15 +1,13 @@
 'use client';
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Header from "../components/Header";
-import TractorDisplayCard from "../TractroDisplayCard";
+import Header from "../../../components/organisms/navbar";
+import SparePartDispalyCard from "../../../components/organisms/spare-part-display-card";
 import { Range } from "react-range";
 
-export default function ProductList() {
+export default function SparePartsPage() {
   const [priceRange, setPriceRange] = useState([10000, 50000]); // [min, max]
   const [hoursUsedRange, setHoursUsedRange] = useState([1000, 5000]); // [min, max]
-
 
   // Handle range change for price
   const handlePriceChange = (values) => {
@@ -27,7 +25,7 @@ export default function ProductList() {
       {/* Main Content Section */}
       <div className="flex flex-wrap lg:flex-nowrap">
         {/* Left Ribbon - Filter Options */}
-        <div className="w-full lg:w-1/5 bg-white p-6 shadow-lg rounded-lg pt-20 fixed top-20 left-0 z-10 border-r border-gray-200">
+        <div className="w-full lg:w-1/5 bg-white p-6 shadow-lg rounded-lg pt-20 fixed top-20 left-0 z-10 border-r border-gray-200 min-h-screen">
           <h2 className="font-semibold text-xl text-gray-800 mb-6">Filters</h2>
 
           {/* Price Filter */}
@@ -61,18 +59,6 @@ export default function ProductList() {
             </div>
           </div> */}
 
-          {/* Location Filter */}
-          <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-2">Location</h3>
-            <select className="w-full border-gray-300 rounded-md p-2">
-              <option value="">Select Location</option>
-              <option value="New York">New York</option>
-              <option value="California">California</option>
-              <option value="Texas">Texas</option>
-              <option value="Florida">Florida</option>
-            </select>
-          </div>
-
           {/* Hours Used Filter */}
           {/* <div className="mb-6">
             <h3 className="font-medium text-gray-800 mb-2">Hours Used</h3>
@@ -104,50 +90,28 @@ export default function ProductList() {
             </div>
           </div> */}
 
-          {/* Horsepower Filter */}
-          <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-2">Horsepower</h3>
-            <input
-              type="number"
-              className="w-full border-gray-300 rounded-md p-2"
-              placeholder="Enter horsepower"
-            />
-          </div>
-
-          {/* Make Filter */}
-          <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-2">Make</h3>
+          {/* Additional Filters (Optional) */}
+          {/* <div className="mb-6">
+            <h3 className="font-medium text-gray-800 mb-2">Location</h3>
             <select className="w-full border-gray-300 rounded-md p-2">
-              <option value="">Select Make</option>
-              <option value="John Deere">John Deere</option>
-              <option value="Case IH">Case IH</option>
-              <option value="Caterpillar">Caterpillar</option>
-              <option value="Kubota">Kubota</option>
+              <option value="">Select Location</option>
+              <option value="New York">New York</option>
+              <option value="California">California</option>
+              <option value="Texas">Texas</option>
+              <option value="Florida">Florida</option>
             </select>
-          </div>
-
-          {/* Model Filter */}
-          <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-2">Model</h3>
-            <select className="w-full border-gray-300 rounded-md p-2">
-              <option value="">Select Model</option>
-              <option value="JD 8400R">JD 8400R</option>
-              <option value="Case IH Magnum 380">Case IH Magnum 380</option>
-              <option value="Caterpillar 770G">Caterpillar 770G</option>
-              <option value="Kubota M7-171">Kubota M7-171</option>
-            </select>
-          </div>
+          </div> */}
         </div>
 
         {/* Main Content Area */}
-        <div className="w-full lg:w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pt-6 lg:pt-20 ml-auto lg:ml-1/5">
-          <TractorDisplayCard />
-          <TractorDisplayCard />
-          <TractorDisplayCard />
-          <TractorDisplayCard />
-          <TractorDisplayCard />
-          <TractorDisplayCard />
-          <TractorDisplayCard />
+        <div className="w-full lg:w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 lg:pt-20 ml-auto lg:ml-1/5">
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
         </div>
       </div>
     </div>

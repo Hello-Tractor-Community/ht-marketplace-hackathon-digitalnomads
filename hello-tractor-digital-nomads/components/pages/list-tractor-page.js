@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from "react"
-import Header from "./components/Header"
-import TractorForm from "./TractorListingForm"
-import ProgressSteps from "./ProgressSteps"
+import Header from "../organisms/navbar"
+import TractorForm from "../organisms/tractor-listing-form"
+import ProgressSteps from "../organisms/progress-steps"
 
 export default function ListTractorPage() {
   const [currentStep, setCurrentStep] = useState(1)

@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import TTractorDisplayCard from "./TractroDisplayCard";
 
-export default function Tractor() {
+function Tractor() {
     return(
         <div className="bg-white">
             <Header />

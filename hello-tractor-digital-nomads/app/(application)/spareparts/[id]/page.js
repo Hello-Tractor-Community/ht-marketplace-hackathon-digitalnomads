@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 
-import Header from "@/app/components/Header";
-import SparePartDisplayCard from "@/app/SparePartDisplayCard";
+import Header from "@/components/organisms/navbar";
+import SparePartDisplayCard from "@/components/organisms/spare-part-display-card";
 
 export default function SparePart() {
     const router = useRouter;

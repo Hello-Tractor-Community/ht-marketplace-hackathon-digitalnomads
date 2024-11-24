@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import TractorDisplayCard from "./TractroDisplayCard";
+import Header from "../components/header";
+import TractorDisplayCard from "../components/organisms/tractor-display-card";
 
 export default function ProductList(){
     return (

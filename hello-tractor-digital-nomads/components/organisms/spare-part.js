@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import SparePartDispalyCard from "./SparePartDisplayCard";
+import Header from "../components/header";
+import SparePartDispalyCard from "../components/organisms/spare-part-display-card";
 
 export default function SparePart() {
     return (

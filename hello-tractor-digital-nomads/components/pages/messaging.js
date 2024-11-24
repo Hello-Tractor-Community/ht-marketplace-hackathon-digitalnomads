@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Search, Video, MoreVertical, Send, Paperclip } from 'lucide-react';
-import Header from './components/Header';
+import Header from '../organisms/navbar';
 
 export default function MessagingInterface() {
   const [message, setMessage] = useState('');
