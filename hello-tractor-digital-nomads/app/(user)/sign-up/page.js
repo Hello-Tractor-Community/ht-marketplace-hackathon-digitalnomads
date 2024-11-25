@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from "react";
-import { useRouter } from 'next/navigation'; // Import useRouter
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import Image from "next/image";
+
 import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 
@@ -73,29 +74,36 @@ export default function AuthCard() {
       <div className="absolute inset-0 flex">
         {/* Left Side with Pink Background and Image */}
         <div className="w-1/2 bg-primary relative flex items-center justify-center">
-          <img
+          <Image
             src="/AzizaGesture1.png"
             alt="Left Side Image"
             className="object-contain w-3/4 h-auto"
             style={{ maxHeight: "80%" }}
+            width={100}
+            height={100}
           />
         </div>
 
         {/* Right Side with White Background and Image */}
         <div className="w-1/2 bg-white relative flex items-center justify-center">
-          <img
+          <Image
             src="/GitongaGesture1.png"
             alt="Right Side Image"
             className="object-contain w-full h-auto"
             style={{ maxHeight: "60%" }}
+            width={100}
+            height={100}
           />
         </div>
 
         <div className="absolute top-4 left-4">
-          <img
+          <Image
             src="/HT_LOGO_RGB_white 1.png"
             alt="Logo"
-            className="w-48 h-auto" /* Adjust width to size the logo */
+            className="w-48 h-auto"
+            width={100}
+            height={100}
+             /* Adjust width to size the logo */
           />
         </div>
       </div>
@@ -222,18 +230,22 @@ export default function AuthCard() {
           </div>
           <div className="flex items-center space-x-4">
             <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-              <img
+              <Image
                 className="w-5 h-5 mr-2"
                 src="google.png"
                 alt="Google"
+                width={20}
+                height={20}
               />
               {"Sign Up with Google"}
             </button>
             <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-              <img
+              <Image
                 className="w-5 h-5 mr-2"
                 src="Facebook.png"
                 alt="Facebook"
+                width={20}
+                height={20}
               />
               {"Sign Up"}
             </button>
@@ -243,11 +255,3 @@ export default function AuthCard() {
     </div>
   );
 }
-
-// export default function Home() {
-//   return (
-//     <div>
-//       <Tractor />
-//     </div>
-//   );
-// }

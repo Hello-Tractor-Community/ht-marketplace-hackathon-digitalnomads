@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Image } from "next/image"
+import  Image  from "next/image"
 import { signIn } from 'next-auth/react';
 
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
@@ -80,29 +80,35 @@ export default function LoginCard() {
             <div className="absolute inset-0 flex">
                 {/* Left Side with Pink Background and Image */}
                 <div className="w-1/2 bg-primary relative flex items-center justify-center">
-                    <img
+                    <Image
                         src="/AzizaGesture1.png"
                         alt="Left Side Image"
                         className="object-contain w-3/4 h-auto"
+                        width={50}
+                        height={50}
                         style={{ maxHeight: "80%" }}
                     />
                 </div>
 
                 {/* Right Side with White Background and Image */}
                 <div className="w-1/2 bg-white relative flex items-center justify-center">
-                    <img
+                    <Image
                         src="/GitongaGesture1.png"
                         alt="Right Side Image"
                         className="object-contain w-full h-auto"
                         style={{ maxHeight: "60%" }}
+                        width={50}
+                        height={50}
                     />
                 </div>
 
                 <div className="absolute top-4 left-4">
-                    <img
+                    <Image
                         src="/HT_LOGO_RGB_white 1.png"
                         alt="Logo"
                         className="w-48 h-auto" /* Adjust width to size the logo */
+                        width={50}
+                        height={50}
                     />
                 </div>
             </div>
@@ -196,18 +202,22 @@ export default function LoginCard() {
                     </div>
                     <div className="flex items-center space-x-4">
                         <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                            <img
+                            <Image
                                 className="w-5 h-5 mr-2"
                                 src="google.png"
                                 alt="Google"
+                                width={30}
+                                height={30}
                             />
                             {"Sign In with Google"}
                         </button>
                         <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                            <img
+                            <Image
                                 className="w-5 h-5 mr-2"
                                 src="Facebook.png"
                                 alt="Facebook"
+                                width={30}
+                                height={30}
                             />
                             {"Sign In"}
                         </button>

@@ -1,5 +1,5 @@
 import { Toaster } from 'react-hot-toast';
-
+import Link from 'next/link';
 export default function Trail() {
     return (
         <>
@@ -13,9 +13,9 @@ export default function Trail() {
                     <p className="mt-4 text-gray-600">
                         Once verified, you can come back to log in.
                     </p>
-                    <a href="/" className="mt-6 inline-block text-hibiscus hover:text-hibiscus-600">
+                    <Link href="/" className="mt-6 inline-block text-hibiscus hover:text-hibiscus-600">
                         Go Back
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

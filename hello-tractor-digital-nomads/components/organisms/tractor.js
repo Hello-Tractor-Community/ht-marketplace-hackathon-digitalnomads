@@ -1,5 +1,5 @@
-import Header from "./navbar";
 import TTractorDisplayCard from "./tractor-display-card";
+import Image from "next/image";
 
 function Tractor() {
     return (
