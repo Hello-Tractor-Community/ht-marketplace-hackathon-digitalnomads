@@ -1,13 +1,17 @@
-import Header from "../components/header";
 import SparePartDispalyCard from "../components/organisms/spare-part-display-card";
-
+import Image from "next/image";
 export default function SparePart() {
     return (
         <div className="bg-white">
-            <Header />
             <div className="flex items-start justify-center pt-30">
                 <div className="w-100 flex justify-center">
-                    <img src="sparepartImage.jpg" alt="SparePart Image" className="w-full h-60" />
+                    <Image
+                        src="sparepartImage.jpg"
+                        alt="SparePart Image"
+                        className="w-full h-60"
+                        width={300}
+                        height={300}
+                    />
                 </div>
                 <div className="p-4 overflow-hidden w-[600px]">
                     <h3 className="text-bold text-[#1F1E17]-800 text-lg font-bold">Chias Diesel Cap</h3>
@@ -76,7 +80,13 @@ export default function SparePart() {
                 <div className="p-4 overflow-hidden flex flex-col items-start">
                     <h3 className="text-bold text-[#1F1E17]-800 text-lg font-bold">Seller Information:</h3>
                     <div className="flex items-start">
-                        <img src="avatar.png" alt="Seller Avatar" className="w-20 h-20" />
+                        <Image
+                            src="avatar.png"
+                            alt="Seller Avatar"
+                            className="w-20 h-20"
+                            width={300}
+                            height={300}
+                        />
                         <div className="mt-5 ml-5">
                             <h3 className="text-sm text-gray-900 font-bold">Seller Score: 89%</h3>
                             <h3 className="text-sm text-gray-900 mt-1 font-bold">Seller Rating: 4.5</h3>
@@ -88,10 +98,12 @@ export default function SparePart() {
             <div className="mb-10 w-full max-w-2xl mx-auto bg-gray-50 p-6 rounded-lg shadow-md">
                 <h3 className="font-bold text-lg mb-4 text-gray-800">1 Review for Tomato</h3>
                 <div className="flex items-start space-x-4">
-                    <img
+                    <Image
                         src="avatar.png"
                         alt="Reviewer Image"
                         className="w-16 h-16 rounded-full border border-gray-300"
+                        width={300}
+                        height={300}
                     />
                     <div className="flex flex-col space-y-2">
                         <div className="flex items-center justify-between">

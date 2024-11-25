@@ -2,15 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation'; // Import useRouter
-
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useForm } from "react-hook-form";
-import {  toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 export default function AuthCard() {
   const router = useRouter(); // Initialize useRouter
   const [showPassword, setShowPassword] = useState(false);
-  const [hasAccount, setHasAccount] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -34,7 +32,7 @@ export default function AuthCard() {
         name: data.name,
         email: data.signupEmail,
         phone: data.phone,
-        password:data.password
+        password: data.password
         // Add any additional signup fields here
       };
 
@@ -108,93 +106,22 @@ export default function AuthCard() {
       <div className="z-10 p-8 w-[300px] lg:w-[500px] h-[600px] bg-white rounded-lg shadow-md">
         {/* Top Toggle Link */}
         <div className="text-right mb-6">
-          {hasAccount ? (
-            <>
-              <span className="text-sm text-gray-500">No Account? </span>
-              <button
-                onClick={() => setHasAccount(false)}
-                className="text-sm text-pink-500 hover:text-pink-600"
-              >
-                Sign Up
-              </button>
-            </>
-          ) : (
             <>
               <span className="text-sm text-gray-500">Already have an account? </span>
               <button
-                onClick={() => setHasAccount(true)}
                 className="text-sm text-pink-500 hover:text-pink-600"
               >
                 Sign In
               </button>
             </>
-          )}
         </div>
 
         {/* Dynamic Card Title */}
         <h1 className="text-2xl font-avenir font-extralight text-gray-900">Welcome to Hello Tractor</h1>
-        <h2 className="text-5xl font-bold text-gray-900 font-merriweather">{hasAccount ? "Sign In" : "Sign Up"}</h2>
+        <h2 className="text-5xl font-bold text-gray-900 font-merriweather">{"Sign Up"}</h2>
 
         {/* Dynamic Form */}
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-          {hasAccount ? (
-            <>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600">
-                  Enter your username or email address
-                </label>
-                <input
-                  {...register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address"
-                    }
-                  })}
-                  type="email"
-                  placeholder="Username or email address"
-                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-hibiscus"
-                />
-                {errors.email && (
-                  <span className="text-red-500 text-sm">{errors.email.message}</span>
-                )}
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters"
-                      }
-                    })}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-hibiscus"
-                  />
-                  <button
-                    type="button"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {!showPassword ? (
-                      <EyeOffIcon className="h-5 w-5 text-gray-400" />
-                    ) : (
-                      <EyeIcon className="h-5 w-5 text-gray-400" />
-                    )}
-                  </button>
-                </div>
-                {errors.password && (
-                  <span className="text-red-500 text-sm">{errors.password.message}</span>
-                )}
-              </div>
-            </>
-          ) : (
             <>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-600">
@@ -255,35 +182,34 @@ export default function AuthCard() {
                   )}
                 </div>
               </div>
-              <div className="w-1/2">
-                  <label className="block text-sm font-medium text-gray-600">
-                    Password
-                  </label>
-                  <input
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters"
-                      }
-                    })}
-                    type="password"
-                    placeholder="Your password"
-                    className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  />
-                  {errors.password && (
-                    <span className="text-red-500 text-sm">{errors.password.message}</span>
-                  )}
-                </div>
+              <div className="w-full mb-4">
+                <label className="block text-sm font-medium text-gray-600">
+                  Password
+                </label>
+                <input
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters"
+                    }
+                  })}
+                  type="password"
+                  placeholder="Your password"
+                  className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+                {errors.password && (
+                  <span className="text-red-500 text-sm">{errors.password.message}</span>
+                )}
+              </div>
             </>
-          )}
 
           <button
             type="submit"
             disabled={loading}
             className="bg-hibiscus hover:bg-hibiscus w-full px-4 py-2 text-white rounded-lg disabled:opacity-50"
           >
-            {loading ? "Loading..." : (hasAccount ? "Sign In" : "Sign Up")}
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </form>
 
@@ -301,7 +227,7 @@ export default function AuthCard() {
                 src="google.png"
                 alt="Google"
               />
-              {hasAccount ? "Sign In with Google" : "Sign Up with Google"}
+              {"Sign Up with Google"}
             </button>
             <button className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
               <img
@@ -309,7 +235,7 @@ export default function AuthCard() {
                 src="Facebook.png"
                 alt="Facebook"
               />
-              {hasAccount ? "Sign In" : "Sign Up"}
+              {"Sign Up"}
             </button>
           </div>
         </div>

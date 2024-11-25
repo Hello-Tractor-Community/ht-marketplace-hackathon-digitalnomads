@@ -1,5 +1,5 @@
 'use client';
-
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function SparePartDisplayCard() {
@@ -14,7 +14,13 @@ export default function SparePartDisplayCard() {
         <div className="bg-white w-72 hover:shadow-lg rounded-lg overflow-hidden hover:border hover:border-gray-200 mr-5 transform hover:scale-105 transition-transform duration-300">
             {/* Image Section */}
             <div className="relative">
-                <img src="sparepartImage.jpg" alt="Spare Part Image" className="w-full h-40 object-cover rounded-t-lg" />
+                <Image 
+                src="sparepartImage.jpg" 
+                alt="Spare Part Image" 
+                className="w-full h-40 object-cover rounded-t-lg"
+                width={300}
+                height={300}
+                 />
             </div>
 
             {/* Card Content */}

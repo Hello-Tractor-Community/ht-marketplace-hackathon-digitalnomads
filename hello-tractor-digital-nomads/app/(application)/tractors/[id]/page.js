@@ -11,7 +11,6 @@ export default function Tractor() {
     const { id } = useParams;
     return(
         <div className="bg-white">
-            <Header />
             <div className="pt-10">
             <div className="pt-20">
             <div className="flex items-center justify-center pt-30">

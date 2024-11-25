@@ -3,10 +3,8 @@ import SparePartDispalyCard from "../organisms/spare-part-display-card";
 
 
 export default function SparePartsPage() {
-    return (
-        <div className="bg-gray-100">
-        <Header />
-                  {/* Main Content Section */}
+  return (
+    <div className="bg-gray-100">
       <div className="flex">
         {/* Left Ribbon - Filter Options */}
         <div className="w-1/6 bg-[#FFFFFF] p-4 shadow-md">
@@ -35,15 +33,15 @@ export default function SparePartsPage() {
 
         {/* Main Content Area */}
         <div className="w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
-            <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
+          <SparePartDispalyCard />
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 }

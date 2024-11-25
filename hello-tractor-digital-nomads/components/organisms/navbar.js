@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { links } from "@/lib/links";
-
+import UserAvatarMenu from "./user-avatar-menu";
 
 export default function Header() {
 
@@ -44,7 +44,8 @@ export default function Header() {
             <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-2 rounded-full">
               SELL
             </button>
-            <Link href='/sign-up'>
+            <UserAvatarMenu />
+            {/* <Link href='/sign-up'>
               <button className="bg-white hover:bg-orange-50 text-orange-500 font-semibold px-6 py-2 rounded-full border border-orange-500 flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +61,7 @@ export default function Header() {
                 </svg>
                 Sign In
               </button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

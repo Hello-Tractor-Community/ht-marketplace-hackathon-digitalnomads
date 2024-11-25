@@ -13,7 +13,7 @@ export default function TractorDisplayCard() {
             {/* Image Section */}
             <div className="relative">
                 <Image
-                    src="TractorImage.png"
+                    src="/TractorImage.png"
                     alt="Tractor Image"
                     className="w-full h-40 object-cover rounded-t-lg"
                     width={100}
@@ -37,11 +37,23 @@ export default function TractorDisplayCard() {
                 {/* Features Section */}
                 <div className="flex items-center mt-4 space-x-6 text-sm text-gray-700">
                     <div className="flex items-center space-x-2">
-                        <img src="/hpIcon.png" alt="Horsepower" className="w-6 h-6" />
+                        <Image
+                            src="/hpIcon.png"
+                            alt="Horsepower"
+                            className="w-6 h-6"
+                            width={100}
+                            height={100}
+                        />
                         <span className="font-medium">60 HP</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <img src="/gearsIcon.png" alt="Drive Type" className="w-6 h-6" />
+                        <Image
+                            src="/gearsIcon.png"
+                            alt="Drive Type"
+                            className="w-6 h-6"
+                            width={100}
+                            height={100}
+                        />
                         <span className="font-medium">2WD</span>
                     </div>
                 </div>
