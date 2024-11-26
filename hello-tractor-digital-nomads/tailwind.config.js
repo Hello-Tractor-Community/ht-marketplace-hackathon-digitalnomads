@@ -11,15 +11,18 @@ export default {
       fontFamily: {
         manrope: "var(--font-manrope)",
         merriweather: "var(--font-merriweather)",
-        avenir:"var(--font-avenir)"
+        avenir: "var(--font-avenir)"
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary:"hsl(var(--primary))",
-        secondary:"hsl(var(--secondary))",
-        hibiscus:"hsl(var(--hibiscus))"
+        primary: "hsl(var(--primary))",
+        secondary: "hsl(var(--secondary))",
+        hibiscus: "hsl(var(--hibiscus))"
       },
+      borderRadius: {
+        'lg': "var(--radius)"
+      }
     },
   },
   plugins: [],

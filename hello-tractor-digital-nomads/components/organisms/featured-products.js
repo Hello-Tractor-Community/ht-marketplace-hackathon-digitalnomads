@@ -1,18 +1,13 @@
 import TractorDisplayCard from "./tractor-display-card";
 import SparePartDisplayCard from "./spare-part-display-card";
 
-import { URL } from "@/constants/url";
-export async function FeaturedTractors() {
-
-    const products = await fetch(`${URL}/api/featuredProducts`);
-    const { tractors, spareParts } = await products.json()
-
-    console.log(tractors)
+export async function FeaturedTractors({ products }) {
+    const { tractors, spareParts } = products;
     return (
         <>
             <div className="mx-auto mt-10 w-11/12 flex flex-col items-center justify-center gap-4">
-                <p className="font-bold text-2xl mb-5">Featured Products</p>
-                <div className="w-full flex flex-col lg:flex-row gap-3">
+                <p className="font-manrope font-bold text-3xl my-6">Featured Products</p>
+                <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-5">
                     {tractors.map((tractor) => (
                         <TractorDisplayCard
                             key={tractor.tractor_id}
@@ -30,8 +25,8 @@ export async function FeaturedTractors() {
                     ))}
                 </div>
 
-                <p className="font-bold text-2xl mb-5">Featured Spare Parts</p>
-                <div className="w-full flex flex-col lg:flex-row gap-3">
+                <p className="font-manrope font-bold text-3xl my-6">Featured Spare Parts</p>
+                <div className="grid grid-cols-3 grid-rows-2 gap-x-5 gap-y-5">
                     {spareParts.map((sparePart) => (
                         <SparePartDisplayCard
                             id={sparePart.spare_part_id}

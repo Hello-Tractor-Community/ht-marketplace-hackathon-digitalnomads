@@ -1,9 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import { Toaster } from "react-hot-toast";
 import { FeaturedTractors } from "@/components/organisms/featured-products";
 
-export default function HomePage() {
+export default async function HomePage() {
+
+  const products = await fetch(`${process.env.URL}/api/featuredProducts`);
+  const data = await products.json()
+
+  
   return (
     <div className="h-full bg-gray-100">
       <div className="relative">
@@ -28,8 +33,9 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+      <Toaster />
 
-      <FeaturedTractors />
+      <FeaturedTractors products={data} />
     </div>
   );
 }

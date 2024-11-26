@@ -1,5 +1,8 @@
+'use client'
+
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 export default function SparePartDisplayCard({
     id,
     brand_name = "Massey Ferguson",
@@ -9,7 +12,7 @@ export default function SparePartDisplayCard({
     quantity = 2,
     image_url = "https://placeholder.com/tractor",
 }) {
-
+    const router = useRouter()
     return (
         <div className="bg-white w-72 hover:shadow-lg rounded-lg overflow-hidden hover:border hover:border-gray-200 mr-5 transform hover:scale-105 transition-transform duration-300">
             {/* Image Section */}
@@ -67,11 +70,9 @@ export default function SparePartDisplayCard({
 
             {/* Action Button Section */}
             <div className="p-4 border-t border-gray-200 bg-gray-50">
-                <Link href={`/spareparts/${id}`}>
-                    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                    <button onClick={() => router.push(`/spareparts/${id}`) } className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                         View Details
                     </button>
-                </Link>
             </div>
         </div>
     );

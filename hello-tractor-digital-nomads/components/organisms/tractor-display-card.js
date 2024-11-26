@@ -39,15 +39,15 @@ export default function TractorDisplayCard({
     }
 
     return (
-        <div className="bg-white w-76 hover:shadow-lg rounded-lg overflow-hidden mr-5 transform hover:scale-105 transition-transform duration-300">
+        <div className="bg-white w-[360px] h-[540px] flex flex-col  hover:shadow-lg rounded-lg overflow-hidden mr-5 transform hover:scale-105 transition-transform duration-300">
             {/* Image Section */}
             <div className="relative">
                 <Image
                     src="/TractorImage.png"
                     alt="Tractor Image"
-                    className="w-full h-40 object-cover rounded-t-lg"
+                    className="w-full object-cover rounded-t-lg"
                     width={100}
-                    height={100}
+                    height={500}
                 />
                 <button
                     onClick={handleWishlistClick}
@@ -72,7 +72,7 @@ export default function TractorDisplayCard({
                 {/* Price Section */}
                 <div className="flex items-center space-x-4 text-sm mt-1">
                     <span className="text-gray-500 line-through">sh{price}</span>
-                    <span className="text-orange-500 font-semibold text-lg">$5.00</span>
+                    <span className="text-orange-500 font-semibold text-lg">sh{price}</span>
                 </div>
 
                 {/* Features Section */}
@@ -117,8 +117,8 @@ export default function TractorDisplayCard({
             </div>
 
             {/* Action Button Section */}
-            <div className="p-4 border-t border-gray-200 bg-gray-50">
-                <button onClick={() => router.push(`/tractors/${id}`)} className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+            <div className="py-2 border-t border-gray-200 bg-gray-50">
+                <button onClick={() => router.push(`/tractors/${id}`)} className="w-full bg-primary hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                     View Details
                 </button>
             </div>

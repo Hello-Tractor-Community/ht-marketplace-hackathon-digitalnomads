@@ -27,11 +27,12 @@ export default function LoginCard() {
         password: data.password,
         redirect: false,
       });
-      console.log('This is the response' + response);
+
+      
       if (!response?.error) {
         router.push('/');
-        toast('Succesfully Logged in')
         router.refresh();
+        toast('Succesfully Logged in')
       } else {
         response.status === 401
           ? toast('Your email or password is incorrect')

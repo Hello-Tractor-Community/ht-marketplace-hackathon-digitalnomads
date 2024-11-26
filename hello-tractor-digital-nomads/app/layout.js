@@ -5,7 +5,11 @@ import { getServerSession } from "next-auth/next"
 import Header from "@/components/organisms/navbar";
 import SessionProvider from "@/components/session-provider";
 import { WishlistProvider } from "@/components/contexts/wishlist";
+import ChatBot from "@/components/organisms/chat-bot";
+
 import { geistSans, geistMono, merriweather, manrope, avenir } from "../lib/fonts";
+
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "HelloTractor",
@@ -26,6 +30,8 @@ export default async function RootLayout({ children }) {
           <WishlistProvider>
             <Header />
             {children}
+            <ChatBot />
+            <Toaster />
           </WishlistProvider>
         </SessionProvider>
       </body>

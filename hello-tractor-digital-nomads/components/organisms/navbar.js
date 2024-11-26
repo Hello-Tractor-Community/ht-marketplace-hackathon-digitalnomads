@@ -30,11 +30,11 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Search for tractor or Spare Part"
-                className="w-96 px-4 py-2 border border-gray-300 rounded-l-full focus:outline-none"
+                className="w-96 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-orange-500 text-white rounded-r-full hover:bg-orange-600 transition-colors duration-300"
+                className="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-orange-600 transition-colors duration-300"
               >
                 Search
               </button>
@@ -43,8 +43,8 @@ export default function Header() {
 
           {/* Right Section - Buttons */}
           <div className="flex items-center space-x-6 mr-10">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-2 rounded-full">
-              SELL
+            <button className="bg-primary px-6 py-2 text-sm font-medium  hover:bg-orange-600 text-white font-semibold rounded-lg">
+              Sell
             </button>
             <Link
               href="/wishlist"
@@ -54,23 +54,6 @@ export default function Header() {
               <Heart className="h-6 w-6" />
             </Link>
             <UserAvatarMenu />
-            {/* <Link href='/sign-up'>
-              <button className="bg-white hover:bg-orange-50 text-orange-500 font-semibold px-6 py-2 rounded-full border border-orange-500 flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Sign In
-              </button>
-            </Link> */}
           </div>
         </div>
       </div>
@@ -83,7 +66,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-800 px-10 py-2 hover:bg-gray-200 transition-colors duration-300"
+                className="text-gray-800 px-10 py-2 hover:bg-gray-200 font-manrope font-semibold transition-colors duration-300"
               >
                 {link.label}
               </Link>

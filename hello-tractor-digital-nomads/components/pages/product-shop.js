@@ -137,7 +137,7 @@ export default function ProductList({ products }) {
         </div>
 
         {/* Main Content Area */}
-        <div className="w-full lg:w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pt-6 lg:pt-20 ml-auto lg:ml-1/5">
+        <div className="w-full lg:w-4/5 p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 pt-6 lg:pt-20 ml-auto lg:ml-1/5">
         {products.tractors.map((tractor) => (
                         <TractorDisplayCard
                             key={tractor.tractor_id}
