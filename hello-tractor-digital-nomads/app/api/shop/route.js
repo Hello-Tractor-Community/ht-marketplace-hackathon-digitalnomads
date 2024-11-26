@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN;
 
 // Helper function to build query string for filters
 function buildFilterQuery(filters) {

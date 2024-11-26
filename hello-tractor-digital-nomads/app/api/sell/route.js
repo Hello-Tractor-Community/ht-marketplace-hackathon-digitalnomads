@@ -2,10 +2,21 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN; // Static token for your API
 
 export async function POST(request) {
   try {
+    if (!DIRECTUS_URL) {
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+  
+    // Validate Authorization Header
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+  
+    const accessToken = authHeader.split(' ')[1];
+
     // Parse the request body to get input parameters
     const body = await request.json();
     const { listing_id, entity_type, quantity } = body;
@@ -32,7 +43,7 @@ export async function POST(request) {
       `${DIRECTUS_URL}/items/${table}/${listing_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -61,7 +72,7 @@ export async function POST(request) {
     await fetch(`${DIRECTUS_URL}/items/${table}/${listing_id}`, {
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ quantity: updatedQuantity }),
@@ -79,7 +90,7 @@ export async function POST(request) {
     const salesResponse = await fetch(`${DIRECTUS_URL}/items/sales`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(salesData),
