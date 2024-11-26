@@ -9,7 +9,7 @@ export async function POST(request) {
   try {
     // Parse the request body to get tractor details
     const body = await request.json();
-    const { make, model, price, hours_used, year_of_manufacturing, engine_power, fuel_type, image, quantity } = body;
+    const { make, model, price, hours_used, year_of_manufacturing, engine_power, fuel_type, image_url, quantity } = body;
 
     // Ensure all required fields are provided
     if (!make || !model || !price || !year_of_manufacturing || !fuel_type || !quantity) {
@@ -21,15 +21,15 @@ export async function POST(request) {
 
     // Extract session details (from directus_users)
     //The section below has been commented out for testing purposes.
-    /*const session = await getServerSession(); // Replace with your session handling logic
+    const session = await getServerSession(); // Replace with your session handling logic
     if (!session || !session.user || !session.user.id) {
       return NextResponse.json(
         { message: 'User is not authenticated.' },
         { status: 401 }
       );
     }
-      */
-    const directus_user_id = "eeb2e9d5-d5f9-4a92-ad53-a84f59db9617"; //Directly hard coded a directus_user_id for testing purposes
+    
+    const directus_user_id = session.user_id;
 
     // Fetch seller_id from the custom users table
     const sellerResponse = await fetch(
@@ -54,8 +54,7 @@ export async function POST(request) {
       );
     }
 
-    const seller_id = sellerData.data[0].id; // Seller ID from the custom `users` table
-    let view_count = 0;
+    const seller_id = sellerData.data[0].user_id; // Seller ID from the custom `users` table
 
     // Prepare payload for Directus
     const payload = {
@@ -66,8 +65,8 @@ export async function POST(request) {
       year_of_manufacturing,
       engine_power,
       fuel_type,
-      image,
-      view_count,
+      image_url,
+      view_count : 0,
       quantity,
       seller_id, // Tie the tractor to the seller
     };
