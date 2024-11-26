@@ -23,13 +23,10 @@ export default function AuthCard() {
     setLoading(true);
 
     try {
-      const endpoint = hasAccount ? "/api/signin" : "/api/signup";
+      const endpoint = "/api/signup";
 
       // Prepare the data based on whether it's signin or signup
-      const formData = hasAccount ? {
-        email: data.email,
-        password: data.password
-      } : {
+      const formData = {
         name: data.name,
         email: data.signupEmail,
         phone: data.phone,
@@ -46,19 +43,12 @@ export default function AuthCard() {
       const responseData = await response.json();
 
       if (response.ok) {
-        console.log(`${hasAccount ? 'Login' : 'Signup'} successful`, responseData);
-        toast.success(`${hasAccount ? 'Login' : 'Signup'} successful`);
-        router.push(hasAccount ? '/' : '/verification');
+        console.log('Login successful');
+        toast.success('Signup successful');
+        router.push('/verification');
       } else {
-        throw new Error(responseData.error || `Failed to ${hasAccount ? 'sign in' : 'sign up'}`);
+        throw new Error(responseData.error || `Failed to'sign up'}`);
       }
-
-      // You might want to handle the successful signup differently
-      if (!hasAccount) {
-        // Automatically switch to login form after successful signup
-        setHasAccount(true);
-      }
-
       reset(); // Clear form
     } catch (err) {
       console.log(err);

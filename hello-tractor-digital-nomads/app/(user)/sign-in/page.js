@@ -21,41 +21,6 @@ export default function LoginCard() {
         reset
     } = useForm();
 
-    // const onSubmit = async (data) => {
-    //     setLoading(true);
-
-    //     try {
-    //         const endpoint = "/api/signin";
-
-    //         // Prepare the data based on whether it's signin or signup
-    //         const formData = {
-    //             email: data.email,
-    //             password: data.password
-    //         }
-
-    //         const response = await fetch(endpoint, {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify(formData),
-    //         });
-
-    //         const responseData = await response.json();
-
-    //         if (response.ok) {
-    //             console.log('Login  successful', responseData);
-    //             toast.success('Login successful');
-    //             router.push('/');
-    //         } else {
-    //             throw new Error(responseData.error || 'Failed to sign in');
-    //         }
-    //         reset(); // Clear form
-    //     } catch (err) {
-    //         console.log(err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
     const handleFormSubmit = async (data) => {
       const response = await signIn('credentials', {
         email: data.email,
@@ -65,10 +30,11 @@ export default function LoginCard() {
       console.log('This is the response' + response);
       if (!response?.error) {
         router.push('/');
+        toast('Succesfully Logged in')
         router.refresh();
       } else {
         response.status === 401
-          ? setError('Your email or password is incorrect')
+          ? toast('Your email or password is incorrect')
           : null;
       }
     };
