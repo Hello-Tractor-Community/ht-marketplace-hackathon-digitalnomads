@@ -37,6 +37,7 @@ export async function GET(request, { params }) {
 
     const listingData = await listingResponse.json();
     const listing = listingData.data;
+    console.log(listing);
 
     if (!listing) {
       return NextResponse.json({ message: 'Listing not found.' }, { status: 404 });
@@ -79,7 +80,7 @@ export async function GET(request, { params }) {
 
     // Fetch reviews for the seller of the listing
     const reviewsResponse = await fetch(
-      `${DIRECTUS_URL}/items/review?filter[seller_id][_eq]=${listing.seller_id}`,
+      `${DIRECTUS_URL}/items/review?filter[entity_type][_eq]=${entity_type}&[entity_id][_eq]=${listing_id}`,
       {
         headers: {
           Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
