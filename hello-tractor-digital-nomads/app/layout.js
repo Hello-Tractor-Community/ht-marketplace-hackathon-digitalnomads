@@ -2,9 +2,10 @@ import "./globals.css";
 
 import { getServerSession } from "next-auth/next"
 
-import Header from "../components/organisms/navbar";
-import { geistSans, geistMono, merriweather, manrope, avenir } from "../lib/fonts";
+import Header from "@/components/organisms/navbar";
 import SessionProvider from "@/components/session-provider";
+import { WishlistProvider } from "@/components/contexts/wishlist";
+import { geistSans, geistMono, merriweather, manrope, avenir } from "../lib/fonts";
 
 export const metadata = {
   title: "HelloTractor",
@@ -22,8 +23,10 @@ export default async function RootLayout({ children }) {
         }
       >
         <SessionProvider session={session}>
-          <Header />
-          {children}
+          <WishlistProvider>
+            <Header />
+            {children}
+          </WishlistProvider>
         </SessionProvider>
       </body>
     </html>

@@ -16,7 +16,7 @@ export default function Tractor() {
                     <div className="flex items-center justify-center pt-30">
                         <div className="w-100 items-left">
                             <Image
-                                src="../TractorImage.png"
+                                src="/TractorImage.png"
                                 alt="Tractor Image"
                                 className="w-full h-60"
                                 width={100}
@@ -81,7 +81,7 @@ export default function Tractor() {
                             <h3 className="text-bold text-[#1F1E17]-800 text-lg font-bold">Seller Information:</h3>
                             <div className="flex">
                                 <Image
-                                    src="../avatar.png"
+                                    src="/avatar.png"
                                     alt="Seller Avatar"
                                     className="w-20 h-20"
                                     width={100}
@@ -99,7 +99,7 @@ export default function Tractor() {
                         <h3 className="font-bold text-lg mb-4 text-gray-800">1 Review for Tomato</h3>
                         <div className="flex items-start space-x-4">
                             <Image
-                                src="../avatar.png"
+                                src="/avatar.png"
                                 alt="Reviewer Image"
                                 className="w-16 h-16 rounded-full border border-gray-300"
                                 width={100}

@@ -55,7 +55,6 @@ export default function MessagingInterface() {
 
   return (
     <div>
-      <Header />
       <div className="flex h-screen bg-white">
         {/* Left Sidebar */}
         <div className="w-80 border-r flex flex-col">

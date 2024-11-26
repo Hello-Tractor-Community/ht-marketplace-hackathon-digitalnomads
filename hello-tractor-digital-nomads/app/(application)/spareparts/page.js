@@ -21,7 +21,6 @@ export default function SparePartsPage() {
 
   return (
     <div className="bg-white min-h-screen pt-20">
-      <Header />
       {/* Main Content Section */}
       <div className="flex flex-wrap lg:flex-nowrap">
         {/* Left Ribbon - Filter Options */}

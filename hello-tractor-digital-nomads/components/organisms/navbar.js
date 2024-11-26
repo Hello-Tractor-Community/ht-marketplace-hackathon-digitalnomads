@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { Heart } from 'lucide-react'
+
 import { links } from "@/lib/links";
 import UserAvatarMenu from "./user-avatar-menu";
 
@@ -19,7 +21,7 @@ export default function Header() {
               className="w-36 h-auto"
               width={144}
               height={36}
-               />
+            />
           </div>
 
           {/* Center Section - Search */}
@@ -44,6 +46,13 @@ export default function Header() {
             <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-2 rounded-full">
               SELL
             </button>
+            <Link
+              href="/wishlist"
+              className="inline-flex items-center justify-center p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-500"
+            >
+              <span className="sr-only">Go to wishlist</span>
+              <Heart className="h-6 w-6" />
+            </Link>
             <UserAvatarMenu />
             {/* <Link href='/sign-up'>
               <button className="bg-white hover:bg-orange-50 text-orange-500 font-semibold px-6 py-2 rounded-full border border-orange-500 flex items-center">

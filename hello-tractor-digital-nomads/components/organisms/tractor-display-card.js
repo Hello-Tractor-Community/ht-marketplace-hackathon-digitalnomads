@@ -1,15 +1,45 @@
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-export default function TractorDisplayCard() {
-    const router = useRouter();
-    const tractorId = '123';
+'use client'
 
-    const handleNavigate = () => {
-        router.push(`/tractors/${tractorId}`);
+import Image from "next/image";
+import { useRouter } from "next/navigation"
+
+import { Heart } from 'lucide-react'
+import { useWishlist } from "@/components/contexts/wishlist"
+import { useSession } from "next-auth/react"
+
+export default function TractorDisplayCard({
+    id,
+    make = 'Farmatic Epc 5 Pro',
+    model,
+    price = '10000000',
+    engine_power = 60,
+    hours_used,
+    fuel_type = 'Diesel',
+    quantity = 10,
+    image_url
+
+}) {
+
+    const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
+    const { data: session } = useSession()
+
+    const router = useRouter()
+
+    const handleWishlistClick = () => {
+        if (!session) {
+            router.push('/sign-in')
+            return
+        }
+
+        if (isInWishlist(id)) {
+            removeFromWishlist(id)
+        } else {
+            addToWishlist(id)
+        }
     }
 
     return (
-        <div className="bg-white w-72 hover:shadow-lg rounded-lg overflow-hidden hover:border hover:border-gray-200 mr-5 transform hover:scale-105 transition-transform duration-300">
+        <div className="bg-white w-76 hover:shadow-lg rounded-lg overflow-hidden mr-5 transform hover:scale-105 transition-transform duration-300">
             {/* Image Section */}
             <div className="relative">
                 <Image
@@ -19,18 +49,29 @@ export default function TractorDisplayCard() {
                     width={100}
                     height={100}
                 />
+                <button
+                    onClick={handleWishlistClick}
+                    className="absolute top-2 right-2 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
+                >
+                    <Heart
+                        className={`w-5 h-5 ${isInWishlist(id)
+                            ? 'fill-red-500 text-red-500'
+                            : 'text-gray-600'
+                            }`}
+                    />
+                </button>
             </div>
 
             {/* Card Content */}
             <div className="p-5">
                 {/* Title Section */}
                 <h3 className="font-semibold text-gray-900 text-xl leading-tight mb-2 truncate hover:text-orange-500 transition-colors">
-                    Farmatic Epc 5 Pro
+                    {make}
                 </h3>
 
                 {/* Price Section */}
                 <div className="flex items-center space-x-4 text-sm mt-1">
-                    <span className="text-gray-500 line-through">$8.00</span>
+                    <span className="text-gray-500 line-through">sh{price}</span>
                     <span className="text-orange-500 font-semibold text-lg">$5.00</span>
                 </div>
 
@@ -44,7 +85,7 @@ export default function TractorDisplayCard() {
                             width={100}
                             height={100}
                         />
-                        <span className="font-medium">60 HP</span>
+                        <span className="font-medium">{engine_power}HP</span>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Image
@@ -54,7 +95,7 @@ export default function TractorDisplayCard() {
                             width={100}
                             height={100}
                         />
-                        <span className="font-medium">2WD</span>
+                        <span className="font-medium">{fuel_type}</span>
                     </div>
                 </div>
 
@@ -64,7 +105,7 @@ export default function TractorDisplayCard() {
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" stroke="currentColor">
                             <path d="M9 12l2 2 4-4m0 0l-4-4-2 2m4 4H5" />
                         </svg>
-                        <span>Available Now</span>
+                        {quantity === 0 ? <span>Out of Stock</span> : <span>{quantity} left</span>}
                     </span>
                     <span className="flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" stroke="currentColor">
@@ -77,7 +118,7 @@ export default function TractorDisplayCard() {
 
             {/* Action Button Section */}
             <div className="p-4 border-t border-gray-200 bg-gray-50">
-                <button onClick={handleNavigate} className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                <button onClick={() => router.push(`/tractors/${id}`)} className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full text-sm font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                     View Details
                 </button>
             </div>

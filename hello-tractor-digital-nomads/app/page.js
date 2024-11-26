@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+
+import { FeaturedTractors } from "@/components/organisms/featured-products";
+
 export default function HomePage() {
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="h-full bg-gray-100">
       <div className="relative">
         <Image
           src="/backgroundtractor.png"
@@ -25,6 +28,8 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+
+      <FeaturedTractors />
     </div>
   );
 }

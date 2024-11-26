@@ -24,12 +24,7 @@ export async function GET(request) {
     const sparePartFilters = buildFilterQuery(url.searchParams.get('spare_part_filters'));
 
     // Fetch tractors with optional filters
-    const tractorsResponse = await fetch(`${DIRECTUS_URL}/items/tractor?${tractorFilters}`, {
-      headers: {
-        
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
-      },
-    });
+    const tractorsResponse = await fetch(`${DIRECTUS_URL}/items/tractor?${tractorFilters}`);
 
     if (!tractorsResponse.ok) {
       throw new Error(`Failed to fetch tractors: ${tractorsResponse.statusText}`);
@@ -38,11 +33,7 @@ export async function GET(request) {
     const tractorsData = await tractorsResponse.json();
 
     // Fetch spare parts with optional filters
-    const sparePartsResponse = await fetch(`${DIRECTUS_URL}/items/spare_part?${sparePartFilters}`, {
-      headers: {
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
-      },
-    });
+    const sparePartsResponse = await fetch(`${DIRECTUS_URL}/items/spare_part?${sparePartFilters}`);
 
     if (!sparePartsResponse.ok) {
       throw new Error(`Failed to fetch spare parts: ${sparePartsResponse.statusText}`);
