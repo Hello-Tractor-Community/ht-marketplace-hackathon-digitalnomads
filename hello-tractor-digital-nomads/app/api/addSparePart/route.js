@@ -9,7 +9,7 @@ export async function POST(request) {
   try {
     // Parse the request body to get spare part details
     const body = await request.json();
-    const { brand_name, model, price, quantity, image } = body;
+    const { brand_name, model, price, quantity, image_url } = body;
 
     // Ensure all required fields are provided
     if (!brand_name || !model || !price || !quantity) {
@@ -27,7 +27,8 @@ export async function POST(request) {
         { status: 401 }
       );
     }
-    const directus_user_id = session.user.id;
+      
+    const directus_user_id = session.user_id;
 
     // Fetch seller_id from the custom users table
     const sellerResponse = await fetch(
@@ -52,15 +53,16 @@ export async function POST(request) {
       );
     }
 
-    const seller_id = sellerData.data[0].id; // Seller ID from the custom `users` table
+    const seller_id = sellerData.data[0].user_id; // Seller ID from the custom `users` table
 
     // Prepare payload for Directus
     const payload = {
       brand_name,
       model,
       price,
+      view_count : 0,
       quantity,
-      image,
+      image_url,
       seller_id, // Tie the spare part to the seller
     };
 

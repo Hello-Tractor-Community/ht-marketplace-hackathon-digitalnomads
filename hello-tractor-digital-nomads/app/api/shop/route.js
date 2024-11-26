@@ -6,22 +6,37 @@ const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN;
 
 // Helper function to build query string for filters
 function buildFilterQuery(filters) {
-  let queryString = '';
-  if (filters) {
-    queryString = Object.entries(filters)
-      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+  if (!filters) return '';
+  try {
+    const parsedFilters = JSON.parse(filters);
+
+    return Object.entries(parsedFilters)
+      .map(([field, condition]) => {
+        if (typeof condition === 'object') {
+          return Object.entries(condition)
+            .map(
+              ([operator, value]) =>
+                `filter[${field}][${operator}]=${encodeURIComponent(value)}`
+            )
+            .join('&');
+        }
+        return `filter[${field}][_eq]=${encodeURIComponent(condition)}`;
+      })
       .join('&');
+  } catch (error) {
+    console.error('Invalid filter format. Ignoring this filter:', error, filters);
+    return ''; // Ignore invalid filters
   }
-  return queryString;
 }
+
 
 // Handler for GET requests
 export async function GET(request) {
   try {
     // Extract filters from query parameters
     const url = new URL(request.url);
-    const tractorFilters = buildFilterQuery(url.searchParams.get('tractor_filters'));
-    const sparePartFilters = buildFilterQuery(url.searchParams.get('spare_part_filters'));
+    const tractorFilters = buildFilterQuery(url.searchParams.get('tractor_filters')) || '';
+    const sparePartFilters = buildFilterQuery(url.searchParams.get('spare_part_filters')) || '';
 
     // Fetch tractors with optional filters
     const tractorsResponse = await fetch(`${DIRECTUS_URL}/items/tractor?${tractorFilters}`);
