@@ -9,7 +9,7 @@ import UserAvatarMenu from "./user-avatar-menu";
 export default function Header() {
 
   return (
-    <div className="w-full bg-[#FCFCFC] shadow-sm sticky">
+    <div className="w-full bg-[#FCFCFC] shadow-sm">
       {/* Header Section */}
       <div className="w-full h-16 px-6 flex items-center">
         <div className="w-full flex items-center justify-between">
