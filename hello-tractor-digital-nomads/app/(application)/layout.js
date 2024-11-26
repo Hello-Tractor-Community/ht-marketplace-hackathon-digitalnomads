@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 
 import { getServerSession } from "next-auth/next"
 
@@ -7,7 +7,7 @@ import SessionProvider from "@/components/session-provider";
 import { WishlistProvider } from "@/components/contexts/wishlist";
 import ChatBot from "@/components/organisms/chat-bot";
 
-import { geistSans, geistMono, merriweather, manrope, avenir } from "../lib/fonts";
+import { geistSans, geistMono, merriweather, manrope, avenir } from "../../lib/fonts";
 
 import { Toaster } from "react-hot-toast";
 
@@ -19,6 +19,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
 
   const session = await getServerSession();
+  console.log('This is the session',session)
 
   return (
     <html lang="en">

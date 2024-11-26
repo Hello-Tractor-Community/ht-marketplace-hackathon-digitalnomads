@@ -27,21 +27,22 @@ export const options = {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email, password }),
                     });
+
+                    console.log('This is the response',response)
+
                     const data = await response.json();
-                    // console.log('This is the user  ' + JSON.stringify(data));
+
+                    console.log('This is the user  ' + JSON.stringify(data));
                     const user = data.data;
+
+                    console.log('This is the user in the backend', user)
+
                     return user;
                 } catch (error) {
                     // console.log('This is the error ' + JSON.stringify(error));
                     throw new Error('Email address or password is invalid');
                 }
 
-                // if (user) {
-                //     return user;
-                // } else {
-                //     return null
-                // }
-                // return user
             },
         }),
     ],
