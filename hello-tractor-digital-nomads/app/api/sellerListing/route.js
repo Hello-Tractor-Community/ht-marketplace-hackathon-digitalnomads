@@ -2,9 +2,21 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN; // Static token for your API
+
 
 export async function GET(request) {
+  if (!DIRECTUS_URL) {
+    return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+  }
+
+  // Validate Authorization Header
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const accessToken = authHeader.split(' ')[1];
+
   try {
     // Extract query parameters from the URL
     const url = new URL(request.url);
@@ -18,23 +30,30 @@ export async function GET(request) {
       );
     }
 
-    // Verify user is authenticated (get session details)
-    const session = await getServerSession(); // Replace with your session handling logic
-    if (!session || !session.user || !session.user.id) {
-      return NextResponse.json(
-        { message: 'User is not authenticated.' },
-        { status: 401 }
-      );
-    }
+    // Extract session details (from directus_users)
+    // Fetch logged-in user information from Directus
+    const sellerResponse = await fetch(`${DIRECTUS_URL}/users/me`, {
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+      },
+  });
 
-    const directus_user_id = session.user.id;
+  if (!sellerResponse.ok) {
+      const error = await sellerResponse.json();
+      return NextResponse.json({ error }, { status: sellerResponse.status });
+  }
+
+  const sellerData = await sellerResponse.json();
+  const directus_user_id = sellerData.data.id;
 
     // Fetch the seller's id from the custom users table using the directus_user_id
     const userResponse = await fetch(
       `${DIRECTUS_URL}/items/users?filter[directus_user_id][_eq]=${directus_user_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -62,7 +81,7 @@ export async function GET(request) {
       `${DIRECTUS_URL}/items/${table}?filter[seller_id][_eq]=${seller_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );

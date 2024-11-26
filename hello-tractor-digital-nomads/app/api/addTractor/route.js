@@ -2,10 +2,23 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN; // Static token for your API
 
 // Handler for POST requests
 export async function POST(request) {
+  const DIRECTUS_URL = process.env.DIRECTUS_URL;
+
+  if (!DIRECTUS_URL) {
+    return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+  }
+
+  // Validate Authorization Header
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const accessToken = authHeader.split(' ')[1];
+
   try {
     // Parse the request body to get tractor details
     const body = await request.json();
@@ -20,23 +33,30 @@ export async function POST(request) {
     }
 
     // Extract session details (from directus_users)
-    //The section below has been commented out for testing purposes.
-    const session = await getServerSession(); // Replace with your session handling logic
-    if (!session || !session.user || !session.user.id) {
-      return NextResponse.json(
-        { message: 'User is not authenticated.' },
-        { status: 401 }
-      );
-    }
-    
-    const directus_user_id = session.user_id;
+    // Fetch logged-in user information from Directus
+    const userResponse = await fetch(`${DIRECTUS_URL}/users/me`, {
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+      },
+  });
+
+  if (!userResponse.ok) {
+      const error = await userResponse.json();
+      return NextResponse.json({ error }, { status: userResponse.status });
+  }
+
+  const userData = await userResponse.json();
+  const directus_user_id = userData.data.id;
+
 
     // Fetch seller_id from the custom users table
     const sellerResponse = await fetch(
       `${DIRECTUS_URL}/items/users?filter[directus_user_id][_eq]=${directus_user_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -75,7 +95,7 @@ export async function POST(request) {
     const tractorResponse = await fetch(`${DIRECTUS_URL}/items/tractor`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),

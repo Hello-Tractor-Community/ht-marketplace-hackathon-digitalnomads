@@ -2,9 +2,20 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN; // Static token for your API
 
 export async function GET(request, { params }) {
+  if (!DIRECTUS_URL) {
+    return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+  }
+
+  // Validate Authorization Header
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const accessToken = authHeader.split(' ')[1];
+
   try {
     // Parse the URL to extract query parameters
     const { listing_id } = params; // Extract tractor ID from URL params
@@ -26,7 +37,7 @@ export async function GET(request, { params }) {
       `${DIRECTUS_URL}/items/${table}/${listing_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -48,7 +59,7 @@ export async function GET(request, { params }) {
       `${DIRECTUS_URL}/items/sales?filter[entity_type][_eq]=${entity_type}&filter[entity_id][_eq]=${listing_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -66,7 +77,7 @@ export async function GET(request, { params }) {
       `${DIRECTUS_URL}/items/location?filter[entity_id][_eq]=${listing.seller_id}&filter[entity_type][_eq]=user`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -83,7 +94,7 @@ export async function GET(request, { params }) {
       `${DIRECTUS_URL}/items/review?filter[entity_type][_eq]=${entity_type}&[entity_id][_eq]=${listing_id}`,
       {
         headers: {
-          Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );

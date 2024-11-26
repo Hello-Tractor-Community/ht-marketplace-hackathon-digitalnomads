@@ -2,18 +2,12 @@ import { NextResponse } from 'next/server';
 
 // Directus API configuration
 const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-instance.com'
-const DIRECTUS_API_TOKEN = process.env.DIRECTUS_API_TOKEN; // Static token for your API
 
 // Handler for GET requests
 export async function GET() {
   try {
     // Fetch dealers with their associated contact and location details
-    const dealersResponse = await fetch(`${DIRECTUS_URL}/items/dealer?fields=dealer_id,description`, {
-
-        headers: {
-        Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
-      },
-    });
+    const dealersResponse = await fetch(`${DIRECTUS_URL}/items/dealer?fields=dealer_id,description`);
 
     if (!dealersResponse.ok) {
       throw new Error(`Failed to fetch dealers: ${dealersResponse.statusText}`);
@@ -24,11 +18,7 @@ export async function GET() {
     // Fetch contact details for each dealer (supporting multiple contacts)
     const contacts = await Promise.all(
       dealersData.data.map(async (dealer) => {
-        const contactResponse = await fetch(`${DIRECTUS_URL}/items/contact?filter[entity_id][_eq]=${dealer.dealer_id}&filter[entity_type][_eq]=dealer`, {
-          headers: {
-            Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
-          },
-        });
+        const contactResponse = await fetch(`${DIRECTUS_URL}/items/contact?filter[entity_id][_eq]=${dealer.dealer_id}&filter[entity_type][_eq]=dealer`);
 
         if (!contactResponse.ok) {
           throw new Error(`Failed to fetch contact for dealer ${dealer.dealer_id}: ${contactResponse.statusText}`);
@@ -41,12 +31,7 @@ export async function GET() {
     // Fetch location details for each dealer (supporting multiple locations)
     const locations = await Promise.all(
       dealersData.data.map(async (dealer) => {
-        const locationResponse = await fetch(`${DIRECTUS_URL}/items/location?filter[entity_id][_eq]=${dealer.dealer_id}&filter[entity_type][_eq]=dealer`, {
-            //This header section should be removed if DIRECTUS does not require authentication. 
-            headers: {
-            Authorization: `Bearer ${DIRECTUS_API_TOKEN}`,
-          },
-        });
+        const locationResponse = await fetch(`${DIRECTUS_URL}/items/location?filter[entity_id][_eq]=${dealer.dealer_id}&filter[entity_type][_eq]=dealer`);
 
         if (!locationResponse.ok) {
           throw new Error(`Failed to fetch location for dealer ${dealer.dealer_id}: ${locationResponse.statusText}`);
