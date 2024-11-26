@@ -5,7 +5,7 @@ const DIRECTUS_URL = process.env.DIRECTUS_URL; // e.g., 'https://your-directus-i
 
 // Handler for GET requests
 export async function GET(request, { params }) {
-  const { id } = params; // Extract tractor ID from URL params
+  const { id } = await params; // Extract tractor ID from URL params
 
   try {
     // Fetch details of the specific tractor

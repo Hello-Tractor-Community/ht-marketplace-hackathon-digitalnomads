@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart } from 'lucide-react';
+import { MapPin, Phone, ChevronDown } from 'lucide-react';
 
 export default function DealersPage() {
   const [filteredDealers, setFilteredDealers] = useState([
@@ -34,7 +34,6 @@ export default function DealersPage() {
     // Add other dealers as necessary
   ]);
 
-  // A mock function for filtering by region or dealer type
   const handleFilterChange = (filterType, value) => {
     const newFilteredDealers = [
       {
@@ -67,76 +66,79 @@ export default function DealersPage() {
   };
 
   return (
-    <div className="w-full bg-[#FCFCFC] min-h-screen">
-      {/* Header */}
-      <div className="w-full h-17 px-6 flex items-center bg-[#FCFCFC] shadow-sm fixed top-0 z-10">
-        <div className="w-full flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center ml-10">
-            <Image
-              src="/HT_LOGO_RGB_Orange 1.png"
-              alt="logo"
-              className="w-36 h-auto"
-              width={144}
-              height={36}
-            />
-          </div>
-        </div>
-      </div>
-
+    <div className="w-full bg-[#FCFCFC] min-h-screen font-avenir">
       {/* Main Content */}
-      <div className="px-10 py-20">
-        <h1 className="text-3xl font-semibold mb-8">Licensed Tractor Dealers</h1>
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <h1 className="text-4xl font-merriweather font-bold mb-8 text-gray-800">Licensed Tractor Dealers</h1>
 
         {/* Filter Section */}
-        <div className="flex space-x-6 mb-8">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
           <div className="flex items-center">
-            <label htmlFor="region" className="text-sm mr-2">Region:</label>
-            <select
-              id="region"
-              className="px-4 py-2 border border-gray-300 rounded-lg"
-              onChange={(e) => handleFilterChange('region', e.target.value)}
-            >
-              <option value="Nairobi">Nairobi</option>
-              <option value="Mombasa">Mombasa</option>
-              {/* Add other regions */}
-            </select>
+            <label htmlFor="region" className="text-sm font-medium text-gray-700 mr-2">Region:</label>
+            <div className="relative">
+              <select
+                id="region"
+                className="appearance-none bg-white border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                onChange={(e) => handleFilterChange('region', e.target.value)}
+              >
+                <option value="Nairobi">Nairobi</option>
+                <option value="Mombasa">Mombasa</option>
+                <option value="Eldoret">Eldoret</option>
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+            </div>
           </div>
 
           <div className="flex items-center">
-            <label htmlFor="dealer" className="text-sm mr-2">Dealer Type:</label>
-            <select
-              id="dealer"
-              className="px-4 py-2 border border-gray-300 rounded-lg"
-              onChange={(e) => handleFilterChange('dealer', e.target.value)}
-            >
-              <option value="CMC">CMC (New Holland Dealer)</option>
-              <option value="Mascor">Mascor (John Deere)</option>
-              {/* Add other dealers */}
-            </select>
+            <label htmlFor="dealer" className="text-sm font-medium text-gray-700 mr-2">Dealer Type:</label>
+            <div className="relative">
+              <select
+                id="dealer"
+                className="appearance-none bg-white border border-gray-300 rounded-lg py-2 pl-4 pr-10 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                onChange={(e) => handleFilterChange('dealer', e.target.value)}
+              >
+                <option value="CMC">CMC (New Holland Dealer)</option>
+                <option value="Mascor">Mascor (John Deere)</option>
+                <option value="FMD">FMD (Massey Ferguson)</option>
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+            </div>
           </div>
         </div>
 
         {/* Dealer List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDealers.map((dealer) => (
-            <div key={dealer.id} className="p-6 bg-white shadow-lg rounded-lg">
-              <h2 className="font-semibold text-lg">{dealer.name}</h2>
-              <p className="text-sm text-gray-600">{dealer.phone}</p>
-              <p className="text-sm text-gray-600">{dealer.address}</p>
-              <Link href={`/dealers/${dealer.id}`} className="mt-5 px-2 py-1 h-[30px] bg-primary text-white text-sm text-lg rounded-lg shadow-md hover:bg-orange-600 transition">
-                View Profile
-              </Link>
+            <div key={dealer.id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+              <div className="p-6">
+                <h2 className="font-merriweather font-semibold text-xl mb-2 text-gray-800">{dealer.name}</h2>
+                <div className="flex items-center text-gray-600 mb-2">
+                  <Phone size={16} className="mr-2" />
+                  <p className="text-sm">{dealer.phone}</p>
+                </div>
+                <div className="flex items-center text-gray-600 mb-4">
+                  <MapPin size={16} className="mr-2" />
+                  <p className="text-sm">{dealer.address}</p>
+                </div>
+                <Link 
+                  href={`/dealers/${dealer.id}`} 
+                  className="inline-block mt-2 px-4 py-2 bg-orange-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 ease-in-out"
+                >
+                  View Profile
+                </Link>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Interactive Map (You will use a map component here, like Leaflet or Google Maps) */}
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Interactive Map of Dealers</h2>
-          {/* You can use a library like Leaflet or Google Maps to embed a map here */}
+        {/* Interactive Map */}
+        <div className="mt-12">
+          <h2 className="text-3xl font-merriweather font-semibold mb-6 text-gray-800">Interactive Map of Dealers</h2>
+          <div className="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
+            <p className="text-gray-500">Map component goes here</p>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
